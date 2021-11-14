@@ -1,16 +1,62 @@
-<div class="row mt-3">
-  <div class="col-md-12">
-    <button type="button" class="rounded p-0">
-      <div class="card" style="width: 18rem">
-        <img
-          src="../../assets/img/Apples.png"
-          class="card-img-top"
-          alt="Apples"
+<div class="card m-auto">
+  <div class="card-header">
+    <h5 class="card-title text-center">Apple Counter</h5>
+  </div>
+  <img src="../../assets/img/Apples.png" class="card-img-top" alt="Apples" />
+  <div class="card-body">
+    <form (ngSubmit)="countAllApples(form)" #form="ngForm">
+      <div class="mb-3">
+        <label class="form-label" for="countOneApple"
+          >Enter time <i>(sec)</i> to count <b>one apple</b></label
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="countOneApple"
+          ngModel
+          name="countOneApple"
+          required
+          #countOneApple="ngModel"
         />
-        <div class="card-body">
-          <h5 class="card-title">Lietuviški obuoliai</h5>
+        <div
+          *ngIf="
+            countOneApple.invalid &&
+            (countOneApple.touched || countOneApple.dirty)
+          "
+          class="help-block mt-1"
+        >
+          <div *ngIf="countOneApple.errors?.['required']">
+            Input field is required!
+          </div>
         </div>
       </div>
-    </button>
+      <div class="mb-3">
+        <label class="form-label" for="countApples"
+          >Enter time <i>(sec)</i> to count <b>all apples</b></label
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="countApples"
+          ngModel
+          name="countApples"
+          required
+          #countApples="ngModel"
+        />
+        <div
+          *ngIf="
+            countApples.invalid && (countApples.touched || countApples.dirty)
+          "
+          class="help-block mt-1"
+        >
+          <div *ngIf="countApples.errors?.['required']">
+            Input field is required!
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" [disabled]="form.invalid" type="submit">
+        Submit
+      </button>
+    </form>
   </div>
 </div>

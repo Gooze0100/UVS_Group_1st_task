@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 export interface Apples {
-  // jei oboulys svera 100g
-  result: number;
+  applesNumber: number;
   countTime: number;
 }
 
@@ -11,5 +11,13 @@ export interface Apples {
 })
 export class ApplesService {
   constructor() {}
+  private subject = new Subject<Apples>();
+
+  sendData(applesNumber: number, countTime: number) {
+    this.subject.next({ applesNumber, countTime });
+  }
+
+  getData(): Observable<Apples> {
+    return this.subject.asObservable();
+  }
 }
-// kadangi cia yra imone kuri uzsiima tarkime kasu sistemomis tai cia tikrai tures skaiciuoti obuolius pvz

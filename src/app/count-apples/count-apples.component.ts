@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ApplesService } from '../services/apples.service';
 
 @Component({
@@ -9,10 +10,22 @@ import { ApplesService } from '../services/apples.service';
 export class CountApplesComponent implements OnInit {
   constructor(private applesService: ApplesService) {}
 
-  countApples() {}
-
   ngOnInit(): void {}
-}
 
-// kaip dezeje turi suskaiciuoti, nes dazniausiai kiekis yra ivedamas?
-// kas yra vartotoja grafine sasaja?
+  countAllApples(form: NgForm) {
+    if (
+      typeof form.value.countApples === 'number' &&
+      typeof form.value.countOneApple === 'number'
+    ) {
+      if (form.value.countApples !== '' && form.value.countOneApple !== '') {
+        if (form.value.countApples > 0 && form.value.countOneApple > 0) {
+          const applesNumber = Math.round(
+            form.value.countApples / form.value.countOneApple
+          );
+          this.applesService.sendData(applesNumber, form.value.countOneApple);
+          form.reset();
+        }
+      }
+    }
+  }
+}

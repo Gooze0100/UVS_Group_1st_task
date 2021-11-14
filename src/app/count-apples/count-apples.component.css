@@ -1,0 +1,13 @@
+.help-block {
+  color: crimson;
+}
+input.ng-valid,
+input.ng-touched,
+input.ng-dirty {
+  border: 1px solid crimson;
+}
+
+input.ng-valid,
+input.ng-untouched {
+  border: 1px solid #ced4da;
+}
